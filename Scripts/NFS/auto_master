@@ -1,0 +1,8 @@
+#
+# Automounter master map
+#
++auto_master		# Use directory service
+/net			/etc/auto.net	-hidefromfinder
+#/home			auto_home	-nobrowse,hidefromfinder
+/Network/Servers	-fstab
+/-			-static

@@ -1,0 +1,12 @@
+# Select ZSHRC Items I use
+#
+alias vi="/usr/local/bin/vim"
+alias excuse="fortune bofh"
+
+# Bind to VIM KeyBindings
+# VIM > EMACS
+bindkey -v
+
+# Hidden macOS Logging Checks to increase OS Log output
+export OS_ACTIVITY_STREAM=YES
+export OS_ACTIVITY_TOOLS_PRIVACY=YES

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>PayloadDescription</key>
+			<string>Configures settings</string>
+			<key>PayloadDisplayName</key>
+			<string>Energy Saver</string>
+			<key>PayloadIdentifier</key>
+			<string>io.kandji.qa.reduceCPUSpeed</string>
+			<key>PayloadType</key>
+			<string>com.apple.MCX</string>
+			<key>PayloadUUID</key>
+			<string>D5426908-E865-4C28-8F38-2029D8046AF3</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>com.apple.EnergySaver.portable.ACPower</key>
+			<dict>
+				<key>Reduce Processor Speed</key>
+				<integer>1</integer>
+			</dict>
+			<key>com.apple.EnergySaver.portable.BatteryPower</key>
+			<dict>
+				<key>Reduce Processor Speed</key>
+				<integer>1</integer>
+			</dict>
+		</dict>
+	</array>
+	<key>PayloadDescription</key>
+	<string>Reduce CPU Settings</string>
+	<key>PayloadDisplayName</key>
+	<string>Reduce CPU Speed</string>
+	<key>PayloadIdentifier</key>
+	<string>io.kandji.qa.reducecpuspeed</string>
+	<key>PayloadOrganization</key>
+	<string>Kandji</string>
+	<key>PayloadScope</key>
+	<string>System</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string></string>
+	<key>PayloadRemovalDisallowed</key>
+	<true/>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>

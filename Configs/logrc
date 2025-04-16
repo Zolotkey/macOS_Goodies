@@ -1,0 +1,69 @@
+show:
+	--info
+	--debug
+	--pager
+	--verbose
+	--force
+	--loss
+	--signpost
+	--backtrace
+
+stream:
+	--level debug
+
+predicate:
+    # All Kandji Agent Logging
+	agent 'subsystem beginsWith "io.kandji"'
+    # All Kandji Agent Logging Minus MQTBee
+	agent2 'subsystem beginsWith "io.kandji" && ! subsystem == "io.kandji.mqtbee"'
+	
+    # Kandji Blog common Predicates by Mike Boylan
+    # https://blog.kandji.io/mac-logging-and-the-log-command-a-guide-for-apple-admins
+	mdm '(process == "mdmclient" && ! subsystem == "com.apple.network") || subsystem == "com.apple.ManagedClient"'
+	contentCache 'subsystem == "com.apple.AssetCache"'
+	apns 'subsystem == "com.apple.apsd"'
+	gatekeeper 'process == "syspolicyd" || subsystem == "com.apple.syspolicy.exec"'
+	mbact 'process == "mobileactivationd" || subsystem == "com.apple.MobileActivation"'
+	login 'process == "loginwindow" && subsystem == "com.apple.login"'
+	xprotect 'subsystem == "com.apple.xprotect"'
+	
+    # Zolo Predicates
+    # Kernel Networking Events
+	kernnet 'subsystem == "com.apple.SystemConfiguration" && category == "KernelEventMonitor"'
+    # Touch ID and OpenDirectory Log Lines
+	tidod 'subsystem == "com.apple.BiometricKit" || ( process == "opendirectoryd" && eventMessage contains[c] "srp")'
+    # FileVault 2 Login Window Items
+	fdeLW '(subsystem == "com.apple.loginwindow" && category == "FDE") || ( process == "fdesetup" && subsystem == "com.apple.ManagedClient" )'
+    # Login Window Logging
+	loginWindow 'subsystem == "com.apple.loginwindow.logging" && category == "LWError"'
+    # OpenDirectory Authentications
+	odAuth '(subsystem == "com.apple.opendirectoryd" && category == "auth") || (subsystem == "com.apple.AccountPolicy" && category == "Helper")'
+    # SecurityAgent Items
+	securityAgent 'subsystem == "com.apple.Authorization" && category == "SecurityAgent"'
+    # AuthKit
+	authKit 'subsystem == "com.apple.authkit"'
+    # HomeKit Logging to troubleshoot HomeKit Items
+	homeKit 'subsystem == "com.apple.Home.framework" && ! category == "HF_Performance"'
+    # TCC or "Apple Vista" Alert System /s 
+	tcc 'subsystem == "com.apple.TCC"'
+    # iCloud Drive Document Diagnostics
+	iclouddriveDocs '(subsystem == "com.apple.clouddocs" && category == "default personal" && eventMessage contains[c] "[NOTICE]")' 
+	
+    # Following MDM predicates require additional MDM Logging Profile
+    #
+    # MDM Daemon items
+	mdmDaemon 'process == "mdmclient" && subsystem == "com.apple.ManagedClient" && category == "MDMDaemon"'
+    # Recent Activity done by MDM
+	mdmRecentActivity 'process == "mdmclient" && subsystem == "com.apple.ManagedClient" && category == "RecentActivity"'
+    # MDM Client items
+	mdmclient 'process == "mdmclient" && subsystem == "com.apple.ManagedClient" && category != "NULL"'
+    # MDM HTTP Calls to MDM Server
+	mdmHTTP 'process == "mdmclient" && subsystem == "com.apple.ManagedClient" && category == "HTTPUtil"'
+    # Declaritive Device Management Logging
+	ddm 'subsystem in { "com.apple.remotemanagementd", "RemoteMangement", "com.apple.devicemanagementclient" }'
+    # APNS Certificiates
+	apnsCert 'subsystem == "com.apple.apsd" && category == "certificate"'
+    # Apple Keychain Issues
+	keychainDebug '(subsystem == "com.apple.SafariShared" && category == "Keychain") || (process == "transparencyd" && eventMessage contains "Keybag") || (subsystem == "com.apple.loginwindow.logging" && eventMessage matches ".*[kK]ey(bag|chain).*" ) || (subsystem == "com.apple.securityd" && eventMessage contains[c] "keychain")'
+    # MDM Initiated Enterprise PKG, PKG Installs as well as Mac Apple Store/VPP Installs
+	asAppInstall 'process == "appstored" && subsystem == "com.apple.appstored" && category IN { "AppInstall", "General", "Scheduler"}'
