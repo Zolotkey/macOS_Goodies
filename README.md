@@ -5,7 +5,7 @@ Zolotkey's Collection of macOS Goodies
 
 ## Scripts
 - `enableLowPowerMode`: A script to enable low power mode on macOS.
-- `NFS': Workaround for NFS nested mount issues on macOS.
+- `NFS`: Workaround for NFS nested mount issues on macOS.
 - `slowNetwork`: A script to slow down the network speed via DummyNet.
 - `startupMute`: A script to mute the startup sound on macOS.
 - `TCP_Tuning`: A script to tune TCP settings on macOS. I get ~110mb/s on file transfers with this.
