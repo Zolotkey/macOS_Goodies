@@ -1,3 +1,12 @@
+# ReadMe
+# How to use this file
+# 1. Install at ~/.logrc
+# 2. Use predicates by using the word at the start of the line
+#   `log stream --predicate agent` - All Kandji Agent Messages
+#   `log show --predicate mdm` - All mdm related items
+# 3. To turn off the added show debug use --no-signpost in the command
+#   `log show --no-loss --no-signpost --no-backtrace --predicate kernnet`
+
 show:
 	--info
 	--debug
