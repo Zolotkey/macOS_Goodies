@@ -57,6 +57,12 @@ predicate:
 	tcc 'subsystem == "com.apple.TCC"'
     # iCloud Drive Document Diagnostics
 	iclouddriveDocs '(subsystem == "com.apple.clouddocs" && category == "default personal" && eventMessage contains[c] "[NOTICE]")' 
+    # APNS Certificiates
+	apnsCert 'subsystem == "com.apple.apsd" && category == "certificate"'
+    # Apple Keychain Issues
+	keychainDebug '(subsystem == "com.apple.SafariShared" && category == "Keychain") || (process == "transparencyd" && eventMessage contains "Keybag") || (subsystem == "com.apple.loginwindow.logging" && eventMessage matches ".*[kK]ey(bag|chain).*" ) || (subsystem == "com.apple.securityd" && eventMessage contains[c] "keychain")'
+    # MDM Initiated Enterprise PKG, PKG Installs as well as Mac Apple Store/VPP Installs
+	asAppInstall 'process == "appstored" && subsystem == "com.apple.appstored" && category IN { "AppInstall", "General", "Scheduler"}'
 	
     # Following MDM predicates require additional MDM Logging Profile
     #
@@ -70,9 +76,3 @@ predicate:
 	mdmHTTP 'process == "mdmclient" && subsystem == "com.apple.ManagedClient" && category == "HTTPUtil"'
     # Declaritive Device Management Logging
 	ddm 'subsystem in { "com.apple.remotemanagementd", "RemoteMangement", "com.apple.devicemanagementclient" }'
-    # APNS Certificiates
-	apnsCert 'subsystem == "com.apple.apsd" && category == "certificate"'
-    # Apple Keychain Issues
-	keychainDebug '(subsystem == "com.apple.SafariShared" && category == "Keychain") || (process == "transparencyd" && eventMessage contains "Keybag") || (subsystem == "com.apple.loginwindow.logging" && eventMessage matches ".*[kK]ey(bag|chain).*" ) || (subsystem == "com.apple.securityd" && eventMessage contains[c] "keychain")'
-    # MDM Initiated Enterprise PKG, PKG Installs as well as Mac Apple Store/VPP Installs
-	asAppInstall 'process == "appstored" && subsystem == "com.apple.appstored" && category IN { "AppInstall", "General", "Scheduler"}'
