@@ -63,6 +63,10 @@ predicate:
 	keychainDebug '(subsystem == "com.apple.SafariShared" && category == "Keychain") || (process == "transparencyd" && eventMessage contains "Keybag") || (subsystem == "com.apple.loginwindow.logging" && eventMessage matches ".*[kK]ey(bag|chain).*" ) || (subsystem == "com.apple.securityd" && eventMessage contains[c] "keychain")'
     # MDM Initiated Enterprise PKG, PKG Installs as well as Mac Apple Store/VPP Installs
 	asAppInstall 'process == "appstored" && subsystem == "com.apple.appstored" && category IN { "AppInstall", "General", "Scheduler"}'
+    # LocalAuthentication Framework
+	localAuth 'subsystem == "com.apple.LocalAuthentication"'
+    # LoginIssues Debug
+	authDebug '(subsystem == "com.apple.LocalAuthentication" && category IN {"ACM", "Biometry"}) || (subsystem == "com.apple.BiometricKit" && category IN { "Daemon-Common", "Daemon-BioLog", "Framework-API"}) || (subsystem == "com.apple.opendirectoryd" && category == "auth") || (subsystem == "com.apple.AccountPolicy" && category == "Helper") || (subsystem == "com.apple.loginwindow.logging") || (process == "opendirectoryd" && eventMessage contains[c] "srp")'
 	
     # Following MDM predicates require additional MDM Logging Profile
     #
