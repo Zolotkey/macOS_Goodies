@@ -80,3 +80,9 @@ predicate:
 	mdmHTTP 'process == "mdmclient" && subsystem == "com.apple.ManagedClient" && category == "HTTPUtil"'
     # Declaritive Device Management Logging
 	ddm 'subsystem in { "com.apple.remotemanagementd", "RemoteMangement", "com.apple.devicemanagementclient" }'
+
+
+    # Random Predicates curated from various sources
+    #
+    # Music App Fun times
+    musicFun 'subsystem == "com.apple.amp.mediaplaybackcore" AND category == "PlaybackEvents"'
